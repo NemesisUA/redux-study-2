@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [account, setAcount] = useState(100);
+
+  const deposit = (value) => {
+    setAcount(account => account + value);
+  }
+
+  const withdraw = (value) => {
+    setAcount(account => account - value);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='input-field'>
+        <div className='account'>{account}</div>
+
+        <button onClick={(e) => deposit(+prompt('How much do you want to deposit?', ''))}>Deposit</button>
+
+        <button onClick={(e) => withdraw(+prompt('How much do you want to withdraw?', ''))}>Withdraw</button>
+      </div>
     </div>
   );
 }
