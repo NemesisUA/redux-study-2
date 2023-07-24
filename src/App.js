@@ -1,25 +1,26 @@
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
-import { useState } from 'react';
 
 function App() {
-  const [account, setAcount] = useState(100);
+  const dispatch = useDispatch();
+  const cash = useSelector(state => state.cash);
 
-  const deposit = (value) => {
-    setAcount(account => account + value);
+  const deposit = (cash) => {
+    dispatch({type: 'ADD_CASH', payload: cash});
   }
 
-  const withdraw = (value) => {
-    setAcount(account => account - value);
+  const withdraw = (cash) => {
+    dispatch({type: 'GET_CASH', payload: cash});
   }
-
+ 
   return (
     <div className="App">
       <div className='input-field'>
         <div className='account'>{account}</div>
 
-        <button onClick={(e) => deposit(+prompt('How much do you want to deposit?', ''))}>Deposit</button>
+        <button onClick={() => deposit(+prompt('How much do you want to deposit?', ''))}>Deposit</button>
 
-        <button onClick={(e) => withdraw(+prompt('How much do you want to withdraw?', ''))}>Withdraw</button>
+        <button onClick={() => withdraw(+prompt('How much do you want to withdraw?', ''))}>Withdraw</button>
       </div>
     </div>
   );
