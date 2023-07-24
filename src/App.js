@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   const dispatch = useDispatch();
-  const cash = useSelector(state => state.cash);
+  const cash = useSelector(state => state.cash.cash);
 
   const deposit = (cash) => {
     dispatch({type: 'ADD_CASH', payload: cash});
@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <div className='input-field'>
-        <div className='account'>{account}</div>
+        <div className='account'>{cash}</div>
 
         <button onClick={() => deposit(+prompt('How much do you want to deposit?', ''))}>Deposit</button>
 
