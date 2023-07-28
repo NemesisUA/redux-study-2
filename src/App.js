@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import { addCashAction, getCashAction } from './store/cashReducer';
 import { addUserAction, deleteUserAction } from './store/usersReducer';
+import { fetchUsers } from './asyncActions/fetchUsers';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function App() {
       name: name,
       id: Date.now(),
     }
+    console.log('user: ', user)
     dispatch(addUserAction(user));
   }
 
@@ -38,12 +40,14 @@ function App() {
         <button onClick={() => withdraw(+prompt('How much do you want to withdraw?', ''))}>Withdraw</button>
 
         <button onClick={()=> addUser(prompt('Add new user name'))}>Add User</button>
+
+        <button onClick={() => dispatch(fetchUsers())}>Add users from DB</button>
       </div>
 
       <div className='users'>
         { users.length > 0 ? 
           users.map(user =>
-             <div onClick={() => deleteUser(user)}>{user.name}</div>)
+             <div key={user.id} onClick={() => deleteUser(user)}>{user.name}</div>)
 
           : <p className='text'>There are no users!</p>
         }
