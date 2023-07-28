@@ -53,6 +53,6 @@ button:active {
   border-radius: 10px;
 }
 
-.users p:hover {
+.users div:hover {
   cursor: pointer;
 }
